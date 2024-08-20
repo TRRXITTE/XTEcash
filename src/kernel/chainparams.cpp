@@ -80,7 +80,6 @@ public:
         consensus.script_flag_exceptions.emplace( // Taproot exception
             uint256S("0x0000000000000000000f14c35b2d841e986ab5441de8c585d5ffe55ea1e395ad"), SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_WITNESS);
         consensus.BIP34Height = 1;
-        consensus.BIP34Hash = uint256S("");
         consensus.BIP65Height = 1; // 000000000000000004c2b624ed5d7756c508d90fd0da2c7c679febfa6c4735f0
         consensus.BIP66Height = 1; // 00000000000000000379eaa19dce8c9b722d46ae6a57c2f1a988119488b50931
         consensus.CSVHeight = 1; // 000000000000000004a1b34462cb8aeebd5799177f7a29cf28f2d1961716b5b5
@@ -100,9 +99,9 @@ public:
 
         // Deployment of Taproot (BIPs 340-342)
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].bit = 2;
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = 1724001017; // April 24th, 2021
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1724001017; // August 11th, 2021
-        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0; //instant
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nStartTime = 1619222400; // April 24th, 2021
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1628640000; // August 11th, 2021
+        consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 709632; // Approximately November 12th, 2021
 
         consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000063c4ebd298db40af57541800");
         consensus.defaultAssumeValid = uint256S("0x000000000000000000026811d149d4d261995ec5b3f64f439a0a10e1a464af9a"); // 824000
@@ -148,14 +147,21 @@ public:
         m_is_mockable_chain = false;
 
         checkpointData = {
-            {}
+            {
+                { 0, uint256S("0x000000005aa70dd580fe107daa3f3b599557e88b316210a21f137ffe93eb1c89")},
+}
         };
 
         m_assumeutxo_data = {
             // TODO to be specified in a future patch.
         };
 
-        chainTxData = ChainTxData{};
+        chainTxData = ChainTxData{
+            // Data from RPC: getchaintxstats 4096 000000000000000000026811d149d4d261995ec5b3f64f439a0a10e1a464af9a
+            .nTime    = 1704194835,
+            .nTxCount = 946728933,
+            .dTxRate  = 6.569290261471664,
+        };
     }
 };
 
