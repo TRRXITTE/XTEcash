@@ -80,7 +80,6 @@ public:
         consensus.script_flag_exceptions.emplace( // Taproot exception
             uint256S("0x0000000000000000000f14c35b2d841e986ab5441de8c585d5ffe55ea1e395ad"), SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_WITNESS);
         consensus.BIP34Height = 1;
-        consensus.BIP34Hash = uint256S("");
         consensus.BIP65Height = 1; // 000000000000000004c2b624ed5d7756c508d90fd0da2c7c679febfa6c4735f0
         consensus.BIP66Height = 1; // 00000000000000000379eaa19dce8c9b722d46ae6a57c2f1a988119488b50931
         consensus.CSVHeight = 1; // 000000000000000004a1b34462cb8aeebd5799177f7a29cf28f2d1961716b5b5
@@ -148,7 +147,9 @@ public:
         m_is_mockable_chain = false;
 
         checkpointData = {
-            {}
+            {
+                { 0, uint256S("0x000000005aa70dd580fe107daa3f3b599557e88b316210a21f137ffe93eb1c89")},
+            }
         };
 
         m_assumeutxo_data = {
